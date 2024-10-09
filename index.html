@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Aku Menyintai Dirimu</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aquawolf04/font-awesome-pro@5cd1511/css/all.css">
+        <link rel="shortcut icon" href="assets/logo_andev-no-name.png" type="image/x-icon">
+        <style>
+        .fa-duotone {
+            position: relative;
+            animation: moveRightReturn 4s infinite;
+        }
+
+        @keyframes moveRightReturn {
+            0% {
+                left: 0;
+            }
+
+            50% {
+                left: 100px;
+            }
+
+            100% {
+                left: 0;
+            }
+
+        }
+        </style>
+    </head>
+    <body class="bg-[#CDE7FF]">
+        <div class="h-screen flex  justify-center items-center">
+            <div id="halo" class="bg-[#7BC7FF] w-80 p-3 flex flex-col gap-2 rounded-md justify-center items-center">
+                <img src="./assets/halo.gif" class="w-80 md:w-80 rounded-md" alt="Halo">
+            </div>
+            <div class="flex flex-col gap-4">
+                <!-- Masuk Pertama -->
+                <div id="masuk" class="bg-[#7BC7FF] w-80 p-3 flex flex-col gap-2 rounded-md justify-center items-center hidden">
+                    <img src="./assets/pelukan.gif" class="w-80 md:w-80 rounded-md bg-white" alt="01">
+                    <div class="bg-[#3190E9] text-center rounded -mt-4 p-1 mb-2">
+                        <div class="w-64 font-bold text-white">
+                            Aku merasa sangat dekat dan nyaman ketika bersamamu
+                        </div>
+                    </div>
+                </div>
+                <!-- Masuk Kedua -->
+                <div id="masukKedua" class="bg-[#7BC7FF] w-80 p-3 flex flex-col gap-2 rounded-md justify-center items-center hidden ">
+                    <img src="./assets/terkejut.gif" class="w-80 md:w-80 rounded-md bg-white" alt="01">
+                    <div class="bg-[#3190E9] text-center rounded -mt-4 p-1 mb-2">
+                        <div class="w-64 font-bold text-white">
+                            Aku sangat mengagumi cara kamu berpikir dan bertindak
+                        </div>
+                    </div>
+                </div>
+                <!-- Masuk Ketiga -->
+                <div id="masukKetiga" class="bg-[#7BC7FF] w-80 p-3 flex flex-col gap-2 rounded-md justify-center items-center hidden ">
+                    <img src="./assets/kabar.gif" class="w-80 md:w-80 rounded-md bg-white" alt="01">
+                    <div class="bg-[#3190E9] text-center rounded -mt-4 p-1 mb-2">
+                        <div class="w-64 font-bold text-white">
+                            Aku selalu ingin tahu kabar dan keadaanmu
+                        </div>
+                    </div>
+                </div>
+                <!-- Masuk Keempat -->
+                <div id="masukKeempat" class="bg-[#7BC7FF] w-80 p-3 flex flex-col gap-2 rounded-md justify-center items-center hidden ">
+                    <img src="./assets/tertarik.gif" class="w-80 md:w-80 rounded-md" alt="01">
+                    <div class="bg-[#3190E9] text-center rounded -mt-4 p-1 mb-2">
+                        <div class="w-64 font-bold text-white">
+                            Aku merasa tertarik dengan semua hal yang kamu lakukan
+                        </div>
+                    </div>
+                </div>
+                <!-- Masuk Lima -->
+                <div id="masukLima" class="bg-[#7BC7FF] w-80 p-3 flex flex-col gap-2 rounded-md justify-center items-center hidden  ">
+                    <img src="./assets/kehadiranmu.gif" class="w-80 md:w-80 rounded-md bg-white" alt="01">
+                    <div class="bg-[#3190E9] text-center rounded -mt-4 p-1 mb-2">
+                        <div class="w-64 font-bold text-white">
+                            Kehadiranmu sangat berarti bagiku
+                        </div>
+                    </div>
+                </div>
+                <!-- Love You -->
+                <div id="masukEnam" class="bg-[#7BC7FF] w-80 p-3 flex flex-col gap-2 rounded-md justify-center items-center hidden relative  ">
+                    <img src="./assets/i_love_you.gif" class="w-80 md:w-80 rounded-md" alt="01">
+                    <canvas class="absolute " id="canvas"></canvas>
+                </div>
+                <button id="moveButton" type="button" class="w-80 px-4 py-1  text-xl rounded-md bg-[#3190E9] font-bold text-white hidden ">
+                    Next
+                    <i class="fa-duotone fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        <script>
+           let currentStep = 0;
+            const steps = [
+                'masuk',
+                'masukKedua',
+                'masukKetiga',
+                'masukKeempat',
+                'masukLima'
+            ];
+
+            function transitionElement() {
+                const haloElement = document.getElementById('halo');
+                const firstElement = document.getElementById(steps[currentStep]);
+                const bottomElement = document.getElementById('moveButton');
+
+                haloElement.classList.add('hidden');
+                firstElement.classList.remove('hidden');
+                bottomElement.classList.remove('hidden');
+            }
+
+            function moveButtonRight() {
+                const moveButton = document.getElementById('moveButton');
+                moveButton.classList.add('move-right');
+            }
+
+            function nextStep() {
+                if (currentStep < steps.length - 1) {
+                    document.getElementById(steps[currentStep]).classList.add('hidden');
+                    currentStep++;
+                    document.getElementById(steps[currentStep]).classList.remove('hidden');
+                }
+                if(currentStep === steps.length - 1){
+                    moveButton.classList.add('hidden');
+                    setTimeout(showFinaleStap, 5000)
+                }
+            }
+
+            function showFinaleStap() {
+                document.getElementById(steps[currentStep]).classList.add('hidden');
+                document.getElementById('masukEnam').classList.remove('hidden');
+            }
+
+            document.getElementById('moveButton').addEventListener('click', nextStep);
+
+            setTimeout(transitionElement, 3000);
+            setTimeout(moveButtonRight, 1000);
+        </script>
+        <script>
+            (function () {
+  'use strict';
+  
+  var canvas = document.querySelector('canvas'),
+      ctx = canvas.getContext('2d'),
+      W = canvas.width = window.innerWidth,
+      H = canvas.height = window.innerHeight,
+      maxP = 700,
+      minP = 1000,
+      fireworks = [];
+  
+  function tick() {
+    var newFireworks = [];
+    ctx.clearRect(0, 0, W, H);
+    
+    fireworks.forEach(function (firework) {
+      firework.draw();
+      if (!firework.done) newFireworks.push(firework);
+    });
+    
+    fireworks = newFireworks;
+    window.requestAnimationFrame(tick);
+  }
+  
+  function Vector(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  
+  Vector.prototype = {
+    constructor: Vector,
+    
+    add: function (vector) {
+      this.x += vector.x;
+      this.y += vector.y;
+    },
+    
+    diff: function (vector) {
+      var target = this.copy();
+      return Math.sqrt(
+        (target.x-=vector.x) * target.x + (target.y-=vector.y) * target.y
+      );
+    },
+    
+    copy: function () {
+      return new Vector(this.x, this.y);
+    }
+  };
+  
+  var colors = [
+    ['rgba(179,255,129,', 'rgba(0,255,0,'], //green / white
+    ['rgba(0,0,255,', 'rgba(100,217,255,'], //blue / cyan
+    ['rgba(255,0,0,', 'rgba(255,255,0,'], //red / yellow
+    ['rgba(145,0,213,', 'rgba(251,144,204,'] //purple / pink
+  ];
+  
+  function Firework(start, target, speed) {
+    this.start = start;
+    this.pos = this.start.copy();
+    this.target = target;
+    this.spread = Math.round(Math.random() * (maxP-minP)) + minP;
+    this.distance = target.diff(start);
+    this.speed = speed || Math.random() * 5 + 15;
+    this.angle = Math.atan2(target.y - start.y, target.x - start.x);
+    this.velocity = new Vector(
+      Math.cos(this.angle) * this.speed,
+      Math.sin(this.angle) * this.speed
+    );
+    
+    this.particals = [];
+    this.prevPositions = [];
+    
+    var colorSet = colors[Math.round(Math.random() * (colors.length -1))];
+    
+    for (var i=0; i<this.spread; i++) {
+      this.particals.push(new Partical(target.copy(), colorSet));
+    }
+  }
+  
+  Firework.prototype = {
+    constructor: Firework,
+    
+    draw: function () {
+      var last = this.prevPositions[this.prevPositions.length -1] || this.pos;
+      
+      ctx.beginPath();
+      ctx.moveTo(last.x, last.y);
+      ctx.lineTo(this.pos.x, this.pos.y);
+      ctx.strokeStyle = 'rgba(255,255,255,.7)';
+      ctx.stroke();
+      
+      this.update();
+    },
+    
+    update: function () {
+      if (this.start.diff(this.pos) >= this.distance) {
+        var newParticals = [];
+        this.particals.forEach(function (partical) {
+          partical.draw();
+          if (!partical.done) newParticals.push(partical);
+        });
+        
+        this.particals = newParticals;
+        this.prevPositions = [];
+        
+        if (!newParticals.length) this.done = true;
+      } else {
+        this.prevPositions.push(this.pos.copy());
+        
+        if (this.prevPositions.length > 8) {
+          this.prevPositions.shift();
+        }
+
+        this.pos.add(this.velocity);
+      }
+    }
+  };
+  
+  function Partical(pos, colors) {
+    this.pos = pos;
+    this.ease = 0.2;
+    this.speed = Math.random() * 6 + 2;
+    this.gravity = Math.random() * 3 + 0.1;
+    this.alpha = .8;
+    this.angle = Math.random() * (Math.PI*2);
+    this.color = colors[Math.round(Math.random() * (colors.length - 1))];
+    this.prevPositions = [];
+  }
+  
+  Partical.prototype = {
+    constructor: Partical,
+    
+    draw: function () {
+      var last = this.prevPositions[this.prevPositions.length -1] || this.pos;
+      
+      ctx.beginPath();
+      ctx.moveTo(last.x, last.y);
+      ctx.lineTo(this.pos.x, this.pos.y);
+      ctx.strokeStyle = this.color + this.alpha + ')';
+      ctx.stroke();
+      
+      this.update();
+    },
+    
+    update: function () {
+      if (this.alpha <= 0) {
+        this.done = true;
+      } else {
+        this.prevPositions.push(this.pos.copy());
+        
+        if (this.prevPositions.length > 10) this.prevPositions.shift();
+        if (this.speed > 1) this.speed -= this.ease;
+        
+        this.alpha -= 0.01;
+        this.gravity += 0.01;
+        
+        this.pos.add({
+          x: Math.cos(this.angle) * this.speed,
+          y: Math.sin(this.angle) * this.speed + this.gravity
+        });
+      }
+    }
+  };
+  
+  function addFirework(target) {
+    var startPos = new Vector(W/2, H);
+    target = target || new Vector(Math.random() * W, Math.random() * (H - 300));
+    fireworks.push(new Firework(startPos, target));
+  }
+  
+  canvas.addEventListener('click', function (e) {
+    addFirework(new Vector(e.clientX, e.clientY))
+  }, false);
+  
+  function randomFirework() {
+    addFirework();
+    window.setTimeout(randomFirework, Math.random() * 500);
+  }
+  
+  tick();
+  randomFirework();
+  
+})();
+        </script>
+    </body>
+</html>
